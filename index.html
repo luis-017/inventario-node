@@ -12,10 +12,10 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f0f2f5;
       min-height: 100vh;
-      padding: 20px;
+      padding: 24px;
     }
 
     .container {
@@ -23,48 +23,71 @@
       margin: 0 auto;
     }
 
-    /* Header */
+    /* Header mejorado */
     .header {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      border-radius: 50%;
     }
 
     .header h1 {
-      color: #333;
-      font-size: 2.5em;
-      margin-bottom: 10px;
+      color: white;
+      font-size: 2.2em;
+      margin-bottom: 8px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
     }
 
     .header p {
-      color: #666;
-      font-size: 1.1em;
+      color: rgba(255,255,255,0.7);
+      font-size: 1em;
     }
 
     /* Grid Layout */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 30px;
+      gap: 28px;
     }
 
-    /* Formulario */
+    /* Formulario mejorado */
     .form-card {
       background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
       height: fit-content;
     }
 
+    .form-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
     .form-card h2 {
-      color: #667eea;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #667eea;
+      color: #1a1a2e;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e0e7ff;
+      font-size: 1.4em;
+      font-weight: 600;
     }
 
     .form-group {
@@ -74,45 +97,49 @@
     .form-group label {
       display: block;
       margin-bottom: 8px;
-      color: #333;
+      color: #374151;
       font-weight: 500;
+      font-size: 0.9em;
     }
 
     .form-group input, .form-group select {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
       font-size: 14px;
-      transition: all 0.3s;
+      transition: all 0.2s;
+      font-family: inherit;
     }
 
     .form-group input:focus, .form-group select:focus {
       outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
 
-    /* Botones */
+    /* Botones modernos */
     .btn {
       padding: 12px 24px;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
       font-size: 14px;
-      font-weight: 600;
-      transition: all 0.3s;
-      margin-right: 10px;
+      font-weight: 500;
+      transition: all 0.2s;
+      margin-right: 12px;
+      font-family: inherit;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
       color: white;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
     }
 
     .btn-success {
@@ -122,7 +149,7 @@
 
     .btn-success:hover {
       background: #059669;
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .btn-danger {
@@ -132,7 +159,7 @@
 
     .btn-danger:hover {
       background: #dc2626;
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .btn-warning {
@@ -142,7 +169,6 @@
 
     .btn-warning:hover {
       background: #d97706;
-      transform: translateY(-2px);
     }
 
     .btn-secondary {
@@ -154,32 +180,43 @@
       background: #4b5563;
     }
 
-    /* Tabla de productos */
+    /* Tabla de productos mejorada */
     .products-card {
       background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.05);
     }
 
     .products-card h2 {
-      color: #667eea;
+      color: #1a1a2e;
       margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #667eea;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e0e7ff;
+      font-size: 1.4em;
+      font-weight: 600;
     }
 
     .search-bar {
       margin-bottom: 20px;
-      padding: 12px;
+      padding: 12px 16px;
       width: 100%;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
       font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .search-bar:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
 
     .table-responsive {
       overflow-x: auto;
+      border-radius: 16px;
     }
 
     table {
@@ -188,21 +225,25 @@
     }
 
     th {
-      background: #f8f9fa;
-      padding: 12px;
+      background: #f8fafc;
+      padding: 14px 12px;
       text-align: left;
       font-weight: 600;
-      color: #333;
-      border-bottom: 2px solid #e0e0e0;
+      color: #1e293b;
+      border-bottom: 2px solid #e2e8f0;
+      font-size: 0.85em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     td {
-      padding: 12px;
-      border-bottom: 1px solid #e0e0e0;
+      padding: 14px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
     }
 
     tr:hover {
-      background: #f8f9fa;
+      background: #f8fafc;
     }
 
     .acciones {
@@ -211,11 +252,12 @@
     }
 
     .btn-small {
-      padding: 6px 12px;
+      padding: 6px 14px;
       font-size: 12px;
+      border-radius: 8px;
     }
 
-    /* Modal */
+    /* Modal mejorado */
     .modal {
       display: none;
       position: fixed;
@@ -225,17 +267,18 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.5);
-      animation: fadeIn 0.3s;
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.2s;
     }
 
     .modal-content {
       background: white;
       margin: 5% auto;
-      padding: 30px;
+      padding: 32px;
       width: 90%;
       max-width: 500px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border-radius: 28px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
       animation: slideDown 0.3s;
     }
 
@@ -243,21 +286,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .modal-header h3 {
-      color: #333;
+      color: #1e293b;
+      font-size: 1.5em;
+      font-weight: 600;
     }
 
     .close {
-      font-size: 28px;
+      font-size: 32px;
       cursor: pointer;
-      color: #999;
+      color: #94a3b8;
+      transition: color 0.2s;
+      line-height: 1;
     }
 
     .close:hover {
-      color: #333;
+      color: #1e293b;
     }
 
     @keyframes fadeIn {
@@ -267,7 +314,7 @@
 
     @keyframes slideDown {
       from {
-        transform: translateY(-50px);
+        transform: translateY(-30px);
         opacity: 0;
       }
       to {
@@ -276,18 +323,21 @@
       }
     }
 
-    /* Alertas */
+    /* Alertas mejoradas */
     .alert {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 15px 20px;
-      border-radius: 8px;
+      top: 24px;
+      right: 24px;
+      padding: 16px 24px;
+      border-radius: 16px;
       color: white;
       font-weight: 500;
       z-index: 2000;
       animation: slideIn 0.3s;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .alert-success {
@@ -309,38 +359,87 @@
       }
     }
 
-    /* Estadísticas */
+    /* Estadísticas modernas */
     .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 28px;
     }
 
     .stat-card {
       background: white;
-      padding: 20px;
-      border-radius: 15px;
+      padding: 24px;
+      border-radius: 24px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
     }
 
     .stat-card h3 {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 10px;
+      color: #64748b;
+      font-size: 0.85em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .stat-card .number {
-      font-size: 32px;
-      font-weight: bold;
-      color: #667eea;
+      font-size: 2.2em;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* Badges para stock bajo */
+    .stock-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .stock-normal {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .stock-low {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .stock-medium {
+      background: #fed7aa;
+      color: #9a3412;
     }
 
     @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
       .grid-2 {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
+      .stats {
+        gap: 16px;
+      }
+      .btn {
+        margin-bottom: 8px;
+      }
+    }
+
+    /* Animación de carga */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #94a3b8;
     }
   </style>
 </head>
@@ -348,20 +447,20 @@
   <div class="container">
     <div class="header">
       <h1>📦 Sistema de Inventario</h1>
-      <p>Gestión completa de productos | CRUD con Node.js y MySQL</p>
+      <p>Gestión inteligente de productos | CRUD con Node.js y MySQL</p>
     </div>
 
     <div class="stats" id="stats">
       <div class="stat-card">
-        <h3>Total Productos</h3>
+        <h3>📦 Total Productos</h3>
         <div class="number" id="totalProductos">0</div>
       </div>
       <div class="stat-card">
-        <h3>Stock Total</h3>
+        <h3>📊 Stock Total</h3>
         <div class="number" id="stockTotal">0</div>
       </div>
       <div class="stat-card">
-        <h3>Valor Inventario</h3>
+        <h3>💰 Valor Inventario</h3>
         <div class="number" id="valorTotal">S/ 0</div>
       </div>
     </div>
@@ -369,31 +468,31 @@
     <div class="grid-2">
       <!-- Formulario para Crear/Actualizar -->
       <div class="form-card">
-        <h2 id="formTitle">➕ Crear Nuevo Producto</h2>
+        <h2 id="formTitle">✨ Nuevo Producto</h2>
         <form id="productoForm">
           <div class="form-group">
-            <label>📝 Nombre del Producto</label>
-            <input type="text" id="nombre" placeholder="Ej: Laptop, Mouse, Teclado..." required>
+            <label>🏷️ Nombre del Producto</label>
+            <input type="text" id="nombre" placeholder="Ej: Laptop Gaming, Mouse Inalámbrico..." required>
           </div>
           <div class="form-group">
             <label>💰 Precio (S/.)</label>
             <input type="number" id="precio" placeholder="0.00" step="0.01" required>
           </div>
           <div class="form-group">
-            <label>📊 Stock</label>
-            <input type="number" id="stock" placeholder="Cantidad" required>
+            <label>📦 Stock</label>
+            <input type="number" id="stock" placeholder="Cantidad disponible" required>
           </div>
-          <div>
-            <button type="submit" class="btn btn-primary" id="btnSubmit">Crear Producto</button>
-            <button type="button" class="btn btn-secondary" id="btnCancelar" style="display:none;">Cancelar</button>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primary" id="btnSubmit">➕ Agregar Producto</button>
+            <button type="button" class="btn btn-secondary" id="btnCancelar" style="display:none;">✖ Cancelar</button>
           </div>
         </form>
       </div>
 
       <!-- Lista de Productos -->
       <div class="products-card">
-        <h2>📋 Lista de Productos</h2>
-        <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Buscar producto...">
+        <h2>📋 Inventario Actual</h2>
+        <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Buscar por nombre...">
         <div class="table-responsive">
           <table id="tablaProductos">
             <thead>
@@ -406,9 +505,9 @@
               </tr>
             </thead>
             <tbody id="listaProductos">
-              <tr><td colspan="5" style="text-align:center;">Cargando productos...</td></tr>
+              <tr><td colspan="5" style="text-align:center; padding: 40px;">🔄 Cargando productos...</td></tr>
             </tbody>
-          </table>
+           </>
         </div>
       </div>
     </div>
@@ -424,19 +523,21 @@
       <form id="editForm">
         <input type="hidden" id="editId">
         <div class="form-group">
-          <label>Nombre</label>
+          <label>🏷️ Nombre</label>
           <input type="text" id="editNombre" required>
         </div>
         <div class="form-group">
-          <label>Precio</label>
+          <label>💰 Precio (S/.)</label>
           <input type="number" id="editPrecio" step="0.01" required>
         </div>
         <div class="form-group">
-          <label>Stock</label>
+          <label>📦 Stock</label>
           <input type="number" id="editStock" required>
         </div>
-        <button type="submit" class="btn btn-success">Actualizar Producto</button>
-        <button type="button" class="btn btn-secondary" id="closeModal">Cancelar</button>
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+          <button type="submit" class="btn btn-success">💾 Actualizar</button>
+          <button type="button" class="btn btn-secondary" id="closeModal">✖ Cancelar</button>
+        </div>
       </form>
     </div>
   </div>
@@ -445,24 +546,61 @@
     const API = "http://localhost:3000/api/productos";
     let productos = [];
 
-    // Mostrar alerta
+    // Mostrar alerta mejorada
     function showAlert(message, type = 'success') {
       const alert = document.createElement('div');
       alert.className = `alert alert-${type}`;
-      alert.textContent = message;
+      const icon = type === 'success' ? '✅' : '❌';
+      alert.innerHTML = `${icon} ${message}`;
       document.body.appendChild(alert);
-      setTimeout(() => alert.remove(), 3000);
+      setTimeout(() => {
+        alert.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => alert.remove(), 300);
+      }, 3000);
+    }
+
+    // Agregar animación de salida
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideOut {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Obtener clase de stock
+    function getStockClass(stock) {
+      if (stock <= 5) return 'stock-low';
+      if (stock <= 20) return 'stock-medium';
+      return 'stock-normal';
+    }
+
+    // Obtener texto de stock
+    function getStockText(stock) {
+      if (stock <= 5) return `⚠️ ${stock} (Bajo)`;
+      if (stock <= 20) return `📦 ${stock} (Medio)`;
+      return `✅ ${stock} (Alto)`;
     }
 
     // Listar productos
     async function listarProductos() {
+      const tbody = document.getElementById('listaProductos');
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px;">⏳ Cargando productos...</td></tr>';
+      
       try {
         const response = await fetch(API);
+        if (!response.ok) throw new Error('Error en la respuesta del servidor');
         productos = await response.json();
-        const tbody = document.getElementById('listaProductos');
         
         if (productos.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay productos registrados</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px;">📭 No hay productos registrados</td></tr>';
           document.getElementById('totalProductos').textContent = '0';
           document.getElementById('stockTotal').textContent = '0';
           document.getElementById('valorTotal').textContent = 'S/ 0';
@@ -472,18 +610,22 @@
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
         const filtered = productos.filter(p => p.nombre.toLowerCase().includes(searchTerm));
 
-        tbody.innerHTML = filtered.map(p => `
-          <tr>
-            <td>${p.id}</td>
-            <td><strong>${p.nombre}</strong></td>
-            <td>S/ ${parseFloat(p.precio).toFixed(2)}</td>
-            <td>${p.stock} unidades</td>
-            <td class="acciones">
-              <button class="btn btn-warning btn-small" onclick="editarProducto(${p.id})">✏️ Editar</button>
-              <button class="btn btn-danger btn-small" onclick="eliminarProducto(${p.id})">🗑️ Eliminar</button>
-            </td>
-          </tr>
-        `).join('');
+        if (filtered.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px;">🔍 No se encontraron productos</td></tr>';
+        } else {
+          tbody.innerHTML = filtered.map(p => `
+            <tr>
+              <td style="font-weight: 500;">${p.id}</td>
+              <td><strong>${escapeHtml(p.nombre)}</strong></td>
+              <td style="color: #059669; font-weight: 600;">S/ ${parseFloat(p.precio).toFixed(2)}</td>
+              <td><span class="stock-badge ${getStockClass(p.stock)}">${getStockText(p.stock)}</span></td>
+              <td class="acciones">
+                <button class="btn btn-warning btn-small" onclick="editarProducto(${p.id})" style="box-shadow: none;">✏️ Editar</button>
+                <button class="btn btn-danger btn-small" onclick="eliminarProducto(${p.id})" style="box-shadow: none;">🗑️ Eliminar</button>
+              </td>
+            </tr>
+          `).join('');
+        }
 
         // Actualizar estadísticas
         const total = productos.length;
@@ -495,16 +637,34 @@
         document.getElementById('valorTotal').textContent = `S/ ${valorTotal.toFixed(2)}`;
       } catch (error) {
         console.error('Error:', error);
-        showAlert('Error al cargar productos', 'error');
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px; color: #ef4444;">❌ Error al cargar productos. Verifica que el servidor esté corriendo.</td></tr>';
+        showAlert('Error al conectar con el servidor', 'error');
       }
+    }
+
+    // Escape HTML para prevenir XSS
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
 
     // Crear producto
     document.getElementById('productoForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const nombre = document.getElementById('nombre').value;
+      const nombre = document.getElementById('nombre').value.trim();
       const precio = parseFloat(document.getElementById('precio').value);
       const stock = parseInt(document.getElementById('stock').value);
+
+      if (!nombre || isNaN(precio) || isNaN(stock)) {
+        showAlert('Por favor completa todos los campos correctamente', 'error');
+        return;
+      }
+
+      const btnSubmit = document.getElementById('btnSubmit');
+      const originalText = btnSubmit.textContent;
+      btnSubmit.textContent = '⏳ Guardando...';
+      btnSubmit.disabled = true;
 
       try {
         const response = await fetch(API, {
@@ -517,9 +677,15 @@
           showAlert('✅ Producto creado exitosamente');
           document.getElementById('productoForm').reset();
           listarProductos();
+        } else {
+          const error = await response.json();
+          showAlert(error.message || 'Error al crear producto', 'error');
         }
       } catch (error) {
-        showAlert('❌ Error al crear producto', 'error');
+        showAlert('❌ Error de conexión al servidor', 'error');
+      } finally {
+        btnSubmit.textContent = originalText;
+        btnSubmit.disabled = false;
       }
     });
 
@@ -527,6 +693,7 @@
     async function editarProducto(id) {
       try {
         const response = await fetch(`${API}/${id}`);
+        if (!response.ok) throw new Error('Producto no encontrado');
         const producto = await response.json();
         
         document.getElementById('editId').value = producto.id;
@@ -536,7 +703,7 @@
         
         document.getElementById('editModal').style.display = 'block';
       } catch (error) {
-        showAlert('Error al cargar producto', 'error');
+        showAlert('Error al cargar el producto', 'error');
       }
     }
 
@@ -544,9 +711,14 @@
     document.getElementById('editForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const id = document.getElementById('editId').value;
-      const nombre = document.getElementById('editNombre').value;
+      const nombre = document.getElementById('editNombre').value.trim();
       const precio = parseFloat(document.getElementById('editPrecio').value);
       const stock = parseInt(document.getElementById('editStock').value);
+
+      if (!nombre || isNaN(precio) || isNaN(stock)) {
+        showAlert('Por favor completa todos los campos', 'error');
+        return;
+      }
 
       try {
         const response = await fetch(`${API}/${id}`, {
@@ -559,15 +731,18 @@
           showAlert('✅ Producto actualizado exitosamente');
           document.getElementById('editModal').style.display = 'none';
           listarProductos();
+        } else {
+          showAlert('Error al actualizar producto', 'error');
         }
       } catch (error) {
-        showAlert('❌ Error al actualizar producto', 'error');
+        showAlert('❌ Error de conexión', 'error');
       }
     });
 
     // Eliminar producto
     async function eliminarProducto(id) {
-      if (confirm('¿Estás seguro de eliminar este producto?')) {
+      const producto = productos.find(p => p.id === id);
+      if (confirm(`¿Estás seguro de eliminar "${producto?.nombre || 'este producto'}"?`)) {
         try {
           const response = await fetch(`${API}/${id}`, {
             method: 'DELETE'
@@ -576,16 +751,22 @@
           if (response.ok) {
             showAlert('✅ Producto eliminado exitosamente');
             listarProductos();
+          } else {
+            showAlert('Error al eliminar producto', 'error');
           }
         } catch (error) {
-          showAlert('❌ Error al eliminar producto', 'error');
+          showAlert('❌ Error de conexión', 'error');
         }
       }
     }
 
     // Búsqueda en tiempo real
+    let searchTimeout;
     document.getElementById('searchInput').addEventListener('input', () => {
-      listarProductos();
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        listarProductos();
+      }, 300);
     });
 
     // Modal handlers
@@ -601,6 +782,11 @@
 
     // Cargar productos al inicio
     listarProductos();
+
+    // Actualizar cada 30 segundos
+    setInterval(() => {
+      listarProductos();
+    }, 30000);
   </script>
 </body>
 </html>
