@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Inventario - Tienda</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .header h1 {
+      color: #333;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1.1em;
+    }
+
+    /* Grid Layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+    }
+
+    /* Formulario */
+    .form-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    .form-card h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #667eea;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    /* Botones */
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+      margin-right: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+    }
+
+    .btn-warning {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .btn-warning:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #6b7280;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #4b5563;
+    }
+
+    /* Tabla de productos */
+    .products-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .products-card h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #667eea;
+    }
+
+    .search-bar {
+      margin-bottom: 20px;
+      padding: 12px;
+      width: 100%;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #f8f9fa;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    tr:hover {
+      background: #f8f9fa;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: slideDown 0.3s;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h3 {
+      color: #333;
+    }
+
+    .close {
+      font-size: 28px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .close:hover {
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Alertas */
+    .alert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      z-index: 2000;
+      animation: slideIn 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .alert-success {
+      background: #10b981;
+    }
+
+    .alert-error {
+      background: #ef4444;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Estadísticas */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .stat-card h3 {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .stat-card .number {
+      font-size: 32px;
+      font-weight: bold;
+      color: #667eea;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📦 Sistema de Inventario</h1>
+      <p>Gestión completa de productos | CRUD con Node.js y MySQL</p>
+    </div>
+
+    <div class="stats" id="stats">
+      <div class="stat-card">
+        <h3>Total Productos</h3>
+        <div class="number" id="totalProductos">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Stock Total</h3>
+        <div class="number" id="stockTotal">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Valor Inventario</h3>
+        <div class="number" id="valorTotal">S/ 0</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Formulario para Crear/Actualizar -->
+      <div class="form-card">
+        <h2 id="formTitle">➕ Crear Nuevo Producto</h2>
+        <form id="productoForm">
+          <div class="form-group">
+            <label>📝 Nombre del Producto</label>
+            <input type="text" id="nombre" placeholder="Ej: Laptop, Mouse, Teclado..." required>
+          </div>
+          <div class="form-group">
+            <label>💰 Precio (S/.)</label>
+            <input type="number" id="precio" placeholder="0.00" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label>📊 Stock</label>
+            <input type="number" id="stock" placeholder="Cantidad" required>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary" id="btnSubmit">Crear Producto</button>
+            <button type="button" class="btn btn-secondary" id="btnCancelar" style="display:none;">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Lista de Productos -->
+      <div class="products-card">
+        <h2>📋 Lista de Productos</h2>
+        <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Buscar producto...">
+        <div class="table-responsive">
+          <table id="tablaProductos">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="listaProductos">
+              <tr><td colspan="5" style="text-align:center;">Cargando productos...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Edición -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>✏️ Editar Producto</h3>
+        <span class="close">&times;</span>
+      </div>
+      <form id="editForm">
+        <input type="hidden" id="editId">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" id="editNombre" required>
+        </div>
+        <div class="form-group">
+          <label>Precio</label>
+          <input type="number" id="editPrecio" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label>Stock</label>
+          <input type="number" id="editStock" required>
+        </div>
+        <button type="submit" class="btn btn-success">Actualizar Producto</button>
+        <button type="button" class="btn btn-secondary" id="closeModal">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const API = "http://localhost:3000/api/productos";
+    let productos = [];
+
+    // Mostrar alerta
+    function showAlert(message, type = 'success') {
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      document.body.appendChild(alert);
+      setTimeout(() => alert.remove(), 3000);
+    }
+
+    // Listar productos
+    async function listarProductos() {
+      try {
+        const response = await fetch(API);
+        productos = await response.json();
+        const tbody = document.getElementById('listaProductos');
+        
+        if (productos.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay productos registrados</td></tr>';
+          document.getElementById('totalProductos').textContent = '0';
+          document.getElementById('stockTotal').textContent = '0';
+          document.getElementById('valorTotal').textContent = 'S/ 0';
+          return;
+        }
+
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = productos.filter(p => p.nombre.toLowerCase().includes(searchTerm));
+
+        tbody.innerHTML = filtered.map(p => `
+          <tr>
+            <td>${p.id}</td>
+            <td><strong>${p.nombre}</strong></td>
+            <td>S/ ${parseFloat(p.precio).toFixed(2)}</td>
+            <td>${p.stock} unidades</td>
+            <td class="acciones">
+              <button class="btn btn-warning btn-small" onclick="editarProducto(${p.id})">✏️ Editar</button>
+              <button class="btn btn-danger btn-small" onclick="eliminarProducto(${p.id})">🗑️ Eliminar</button>
+            </td>
+          </tr>
+        `).join('');
+
+        // Actualizar estadísticas
+        const total = productos.length;
+        const stockTotal = productos.reduce((sum, p) => sum + parseInt(p.stock), 0);
+        const valorTotal = productos.reduce((sum, p) => sum + (parseFloat(p.precio) * parseInt(p.stock)), 0);
+        
+        document.getElementById('totalProductos').textContent = total;
+        document.getElementById('stockTotal').textContent = stockTotal;
+        document.getElementById('valorTotal').textContent = `S/ ${valorTotal.toFixed(2)}`;
+      } catch (error) {
+        console.error('Error:', error);
+        showAlert('Error al cargar productos', 'error');
+      }
+    }
+
+    // Crear producto
+    document.getElementById('productoForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const precio = parseFloat(document.getElementById('precio').value);
+      const stock = parseInt(document.getElementById('stock').value);
+
+      try {
+        const response = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, precio, stock })
+        });
+
+        if (response.ok) {
+          showAlert('✅ Producto creado exitosamente');
+          document.getElementById('productoForm').reset();
+          listarProductos();
+        }
+      } catch (error) {
+        showAlert('❌ Error al crear producto', 'error');
+      }
+    });
+
+    // Editar producto (abrir modal)
+    async function editarProducto(id) {
+      try {
+        const response = await fetch(`${API}/${id}`);
+        const producto = await response.json();
+        
+        document.getElementById('editId').value = producto.id;
+        document.getElementById('editNombre').value = producto.nombre;
+        document.getElementById('editPrecio').value = producto.precio;
+        document.getElementById('editStock').value = producto.stock;
+        
+        document.getElementById('editModal').style.display = 'block';
+      } catch (error) {
+        showAlert('Error al cargar producto', 'error');
+      }
+    }
+
+    // Actualizar producto
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editId').value;
+      const nombre = document.getElementById('editNombre').value;
+      const precio = parseFloat(document.getElementById('editPrecio').value);
+      const stock = parseInt(document.getElementById('editStock').value);
+
+      try {
+        const response = await fetch(`${API}/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, precio, stock })
+        });
+
+        if (response.ok) {
+          showAlert('✅ Producto actualizado exitosamente');
+          document.getElementById('editModal').style.display = 'none';
+          listarProductos();
+        }
+      } catch (error) {
+        showAlert('❌ Error al actualizar producto', 'error');
+      }
+    });
+
+    // Eliminar producto
+    async function eliminarProducto(id) {
+      if (confirm('¿Estás seguro de eliminar este producto?')) {
+        try {
+          const response = await fetch(`${API}/${id}`, {
+            method: 'DELETE'
+          });
+
+          if (response.ok) {
+            showAlert('✅ Producto eliminado exitosamente');
+            listarProductos();
+          }
+        } catch (error) {
+          showAlert('❌ Error al eliminar producto', 'error');
+        }
+      }
+    }
+
+    // Búsqueda en tiempo real
+    document.getElementById('searchInput').addEventListener('input', () => {
+      listarProductos();
+    });
+
+    // Modal handlers
+    const modal = document.getElementById('editModal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const closeModalBtn = document.getElementById('closeModal');
+
+    closeBtn.onclick = () => modal.style.display = 'none';
+    closeModalBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (event) => {
+      if (event.target === modal) modal.style.display = 'none';
+    }
+
+    // Cargar productos al inicio
+    listarProductos();
+  </script>
+</body>
+</html>
